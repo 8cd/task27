@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block main_content %}
+
+<h1>{{ question.title }}</h1>
+<h3>автор: {{ question.author }}</h3>
+
+<p>{{ question.text }}</p>
+<ul>
+{% for answer in answers %}
+    <li>    	
+    	<p>{{ answer.text }} </p>
+    	<p>автор ответа: {{ answer.author }}</p>
+    </li>
+{% endfor %}
+</ul>
+<form method="POST" action="/answer/">
+	{% csrf_token %}
+	{{ form.as_ul }}
+	<input type="hidden" name="question" value="{{ question.id }}">
+	<div class="form-actions">
+		<button type="submit" class="btn btn-primary">Сохранить</button>
+	</div>
+</form>
+
+{% endblock %}
+
+
+	
